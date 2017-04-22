@@ -1,0 +1,106 @@
+﻿@model Hotel.Data.Objects.Entities.Role
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Role</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ManageItems)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ManageItems)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ManageItemCategory)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ManageItemCategory)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ManageUsers)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ManageUsers)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AccessItemLog)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AccessItemLog)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AccessGeneralLog)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AccessGeneralLog)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DateCreated)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DateLastModified)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DateLastModified)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.LastModifiedBy)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LastModifiedBy)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.RoleId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
