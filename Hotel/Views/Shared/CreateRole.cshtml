@@ -1,0 +1,51 @@
+﻿@model Hotel.Data.Objects.Entities.Role
+
+@{
+    Layout = "../Shared/_LayoutModal.cshtml";
+}
+@using (Html.BeginForm("Create", "Roles", FormMethod.Post, new {enctype = "multipart/form-data",role = "form"}))
+{
+    @Html.AntiForgeryToken()
+    <div class="box-body">
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new {@class = "control-label"})
+            @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageUsers, new {@class = "control-label"})
+            @Html.EditorFor(model => model.ManageUsers)
+            @Html.ValidationMessageFor(model => model.ManageUsers, "", new {@class = "text-danger"})
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageItemCategory, new {@class = "control-label"})
+            @Html.EditorFor(model => model.ManageItemCategory)
+            @Html.ValidationMessageFor(model => model.ManageItemCategory, "", new {@class = "text-danger"})
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManageItems, new {@class = "control-label"})
+            @Html.EditorFor(model => model.ManageItems)
+            @Html.ValidationMessageFor(model => model.ManageItems, "", new {@class = "text-danger"})
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AccessGeneralLog, new {@class = "control-label"})
+            @Html.EditorFor(model => model.AccessGeneralLog)
+            @Html.ValidationMessageFor(model => model.AccessGeneralLog, "", new {@class = "text-danger"})
+        </div>    
+           <div class="form-group">
+            @Html.LabelFor(model => model.AccessItemLog, new {@class = "control-label"})
+            @Html.EditorFor(model => model.AccessItemLog)
+            @Html.ValidationMessageFor(model => model.AccessItemLog, "", new {@class = "text-danger"})
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <input type="submit" value="Add User" class="btn btn-primary fa fa-check-circle-o"/>
+        </div>
+    </div>
+}

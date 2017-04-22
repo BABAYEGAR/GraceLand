@@ -1320,6 +1320,8 @@
     <Content Include="Views\Shared\_LayoutModal.cshtml" />
     <Content Include="Views\Shared\CreateUser.cshtml" />
     <Content Include="Views\Shared\CreateCategory.cshtml" />
+    <Content Include="Views\Shared\CreateRole.cshtml" />
+    <Content Include="Views\Shared\CreateItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

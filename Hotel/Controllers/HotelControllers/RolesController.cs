@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Hotel.Data.DataContext.DataContext;
 using Hotel.Data.Objects.Entities;
+using Hotel.Data.Service.Enum;
 
 namespace Hotel.Controllers.HotelControllers
 {
@@ -47,12 +48,27 @@ namespace Hotel.Controllers.HotelControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RoleId,Name,ManageItems,ManageItemCategory,ManageUsers,AccessItemLog,AccessGeneralLog,CreatedBy,DateCreated,DateLastModified,LastModifiedBy")] Role role)
+        public ActionResult Create([Bind(Include = "RoleId,Name,ManageItems,ManageItemCategory,ManageUsers,AccessItemLog,AccessGeneralLog")] Role role)
         {
             if (ModelState.IsValid)
             {
+                var loggedinuser = Session["hotelloggedinuser"] as AppUser;
+                role.DateCreated = DateTime.Now;
+                role.DateLastModified = DateTime.Now;
+                if (loggedinuser != null)
+                {
+                    role.LastModifiedBy = loggedinuser.AppUserId;
+                    role.CreatedBy = loggedinuser.AppUserId;
+                }
+                else
+                {
+                    TempData["login"] = "Your session has expired, Login again!";
+                    TempData["notificationtype"] = NotificationType.Info.ToString();
+                }
                 db.Roles.Add(role);
                 db.SaveChanges();
+                TempData["display"] = "Your have successfully added a role!";
+                TempData["notificationtype"] = NotificationType.Success.ToString();
                 return RedirectToAction("Index");
             }
 
@@ -79,12 +95,26 @@ namespace Hotel.Controllers.HotelControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RoleId,Name,ManageItems,ManageItemCategory,ManageUsers,AccessItemLog,AccessGeneralLog,CreatedBy,DateCreated,DateLastModified,LastModifiedBy")] Role role)
+        public ActionResult Edit([Bind(Include = "RoleId,Name,ManageItems,ManageItemCategory,ManageUsers,AccessItemLog,AccessGeneralLog,CreatedBy,DateCreated")] Role role)
         {
             if (ModelState.IsValid)
             {
+                var loggedinuser = Session["hotelloggedinuser"] as AppUser;
+                role.DateLastModified = DateTime.Now;
+                if (loggedinuser != null)
+                {
+                    role.LastModifiedBy = loggedinuser.AppUserId;
+                }
+                else
+                {
+                    TempData["login"] = "Your session has expired, Login again!";
+                    TempData["notificationtype"] = NotificationType.Info.ToString();
+                }
                 db.Entry(role).State = EntityState.Modified;
                 db.SaveChanges();
+                db.SaveChanges();
+                TempData["display"] = "Your have successfully modified the role!";
+                TempData["notificationtype"] = NotificationType.Success.ToString();
                 return RedirectToAction("Index");
             }
             return View(role);
@@ -113,6 +143,8 @@ namespace Hotel.Controllers.HotelControllers
             Role role = db.Roles.Find(id);
             db.Roles.Remove(role);
             db.SaveChanges();
+            TempData["display"] = "Your have successfully deleted the role!";
+            TempData["notificationtype"] = NotificationType.Error.ToString();
             return RedirectToAction("Index");
         }
 
